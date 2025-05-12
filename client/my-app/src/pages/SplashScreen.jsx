@@ -1,18 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AppLogo from '../components/AppLogo'
 import Loading from '../assets/images/loadingIcon.gif'
 import {initialStateSelector,changeLoading} from "../redux/slice/StateManage"
 import { useDispatch,useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 function SplashScreen() {
-
     const state = useSelector(initialStateSelector)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 
-    setTimeout(()=>{
-        dispatch(changeLoading(true))
-    },2000)
+    useEffect(()=>{
+
+        const dispatchTimeOut = setTimeout(()=>{
+            dispatch(changeLoading(true))
+        },2000)
+
+        const wellComeScreenTimeOut =   setTimeout(()=>{
+            navigate('/well-come')
+        },4000)
+
+
+        return ()=>{
+            clearTimeout(dispatchTimeOut)
+            clearTimeout(wellComeScreenTimeOut)
+        }
+
+    })
 
 
 

@@ -1,9 +1,18 @@
 import React from 'react'
 import AppLogo from '../components/AppLogo'
+import { useNavigate } from "react-router-dom";
+
 
 
 function WellComeScreen() {
+    const navigate = useNavigate()
+
+    const nextPage = ()=>{
+      navigate('/sign-in')
+    }
+  
   return (
+
     <div className='h-[900px]' >
              <div className=' h-[10%]'></div>
         <div className=' h-[55%] '>
@@ -17,7 +26,7 @@ function WellComeScreen() {
             </p>
 
             <div className=' w-[50%] mt-5 h-[50px] ' >
-            <button className=' bg-[#31C48D] text-white h-full w-full rounded-4xl cursor-pointer text-2xl font-bold ' >
+            <button className=' bg-[#31C48D] hover:bg-[#add4c6] text-white h-full w-full rounded-4xl cursor-pointer text-2xl font-bold' onClick={nextPage}  >
                 Agree and Continue
             </button>
             </div>
