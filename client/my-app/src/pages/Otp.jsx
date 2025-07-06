@@ -58,12 +58,15 @@ function Otp() {
             }
         }
     }
+
+    console.log("1",registeredUser)
     useEffect(()=>{
+    console.log("2",registeredUser)
       if(registeredUser?.data?.verify === true){
+    console.log("3",registeredUser)
         navigate('/user-profile')
       }
-   
-    },[registeredUser])
+    },[registeredUser?.data?.verify])
 
 
 
@@ -80,7 +83,6 @@ function Otp() {
             const convertStr = input.join('')
              dispatch({type:'CALL_OTP_API',payload:convertStr})
     }
-
     if(initialLoadingSelector){
       return(
          <div className="h-[35%] flex justify-center ">
@@ -88,6 +90,17 @@ function Otp() {
                 </div>
       )
     }
+
+
+   
+
+
+
+
+
+
+
+
 
   return (
     <div>

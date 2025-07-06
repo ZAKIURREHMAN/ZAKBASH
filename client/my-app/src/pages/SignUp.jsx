@@ -9,15 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { initialStateSelector } from "../redux/slice/StateManage";
 import loader from "../assets/images/loadingIcon.gif";
 import { addSignupUserDataSelector } from "../redux/slice/SignUpSlice";
-
 function SignUp() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const loadingState = useSelector(initialStateSelector);
   const registeredUser = useSelector(addSignupUserDataSelector);
-
-
   const schema = yup
     .object({
       name: yup.string().required("Enter Your Name"),
@@ -31,7 +27,6 @@ function SignUp() {
         .min(5, "Your Password must be Five characters  "),
     })
     .required();
-
   const {
     register,
     handleSubmit,
@@ -39,12 +34,10 @@ function SignUp() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
   const submitData = (data) => {
     dispatch({ type: "USER_REGISTER", payload: data });
     
   };
-
   useEffect(()=>{
     const navigatePg = ()=>{
        if(registeredUser.name && registeredUser.email && registeredUser._id){
@@ -54,8 +47,6 @@ function SignUp() {
     navigatePg()
    
   },[registeredUser])
-
-
 
   return (
     <div>

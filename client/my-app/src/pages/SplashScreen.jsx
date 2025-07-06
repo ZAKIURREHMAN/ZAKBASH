@@ -1,35 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AppLogo from '../components/AppLogo'
 import Loading from '../assets/images/loadingIcon.gif'
-import {initialStateSelector,changeLoading} from "../redux/slice/StateManage"
-import { useDispatch,useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 function SplashScreen() {
-    const state = useSelector(initialStateSelector)
-    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [showLoader,setShowLoader] = useState(false)
 
 
     useEffect(()=>{
 
         const dispatchTimeOut = setTimeout(()=>{
-            dispatch(changeLoading(true))
-        },2000)
+            setShowLoader(true)
+        },1500)
 
         const wellComeScreenTimeOut =   setTimeout(()=>{
             navigate('/well-come')
-        },4000)
-
+        },3000)
 
         return ()=>{
             clearTimeout(dispatchTimeOut)
             clearTimeout(wellComeScreenTimeOut)
         }
-
     })
-
-
 
   return (
     <div className=' h-[900px] ' >
@@ -37,9 +30,11 @@ function SplashScreen() {
         <div className=' h-[55%]'>
             <AppLogo/>            
         </div>
-        <div className='h-[35%] flex justify-center '>
-            {state?<img src={Loading} alt="Loading Icon" />:""}
-        </div>
+        {
+         showLoader?<div className='h-[35%] flex justify-center '>
+        <img src={Loading} alt="Loading Icon" />
+        </div>:""
+        }
     </div>
   )
 }

@@ -26,6 +26,8 @@ function SignIn() {
     console.log(data);
   };
 
+  localStorage.clear()
+  
 
 
   return (
