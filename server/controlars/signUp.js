@@ -10,9 +10,6 @@ const signUp = async (req, res) => {
 
   const alreadyExistUser = await User.findOne({ email });
 
-  // if (alreadyExistUser && alreadyExistUser.verify === true) {
-  //   return res.status(501).json({ message: "This User is Already Register" });
-  // }
 
   if (alreadyExistUser) {
     return res.status(501).json({ message: "This User is Already Register" });
@@ -27,7 +24,7 @@ const signUp = async (req, res) => {
     randomOtp();
   }
   let strOtp = otpArr.join("");
-  // const resultOtp = await sendOTP(email, strOtp);
+  const resultOtp = await sendOTP(email, strOtp);
   signupJwt(name, email);
   
   const hashPassword = await bcrypt.hash(password, 10);
